@@ -1,0 +1,25 @@
+function Hero(name, level){
+	this.nombre = name
+  this.level = level  
+  this.attackbase = 5
+  this.attack = this.attackbase + 50
+  this.dexterity =  -1
+  this.lastHitRoll
+}
+Hero.prototype.hitRoll = function(targetArmor){
+  this.lastHitRoll = Math.floor(Math.random() * (Math.floor(20) - Math.ceil(1)  + 1)) + 1
+	return  this.lastHitRoll + this.dexterity > targetArmor;
+}
+Hero.prototype.attackRoll = function(){
+  var roll = Math.floor(Math.random() * (this.attack - this.attackbase + 1))
+	return  this.lastHitRoll == 20 ?  roll + this.attackbase * 2 : roll + this.attackbase;
+}
+Hero.prototype.toString = function(){
+	return '<'+this.nombre+'> Level ['+this.level+']'
+}
+
+var Character = new Hero('Pedro', 2)
+if(Character.hitRoll(14))
+	console.log(Character + ' Hit Roll ! <'+Character.lastHitRoll+'> Attack !! -> ' + Character.attackRoll())
+else
+  console.log(Character + ' Hit Roll ! <'+Character.lastHitRoll+ '> Freaking miss...')
