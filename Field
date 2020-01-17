@@ -1,0 +1,23 @@
+function Field(alto, ancho){
+	this.alto = alto
+  this.ancho = ancho
+  this.grass = 'style="width:50px;height:50px;background:green;border:1px solid"'
+  this.earth = 'style="width:50px;height:50px;background:brown;border:1px solid"'
+}
+Field.prototype.type = function(){
+	return Math.floor(Math.random() * 2) ? this.grass : this.earth
+}
+Field.prototype.generator = function(){
+  var field = []
+	for(var x = 0; x <= this.alto; x++){    
+    field.push('<div style="display: flex;flex-wrap: wrap;">')
+  	for( var y = 0; y <= this.ancho; y++){
+      field.push('<div '+this.type()+'></div>')
+    }
+    field.push('</div>')
+  }
+  return field.join('\n');
+}
+var scenario = new Field(3,3)
+var body = document.getElementsByTagName('body')
+body[0].innerHTML = scenario.generator()
